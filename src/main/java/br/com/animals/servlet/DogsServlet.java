@@ -1,8 +1,9 @@
 package br.com.animals.servlet;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Comparator;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,14 +18,22 @@ import br.com.animals.Dog;
 @WebServlet(name = "Dogs", value = "/dogs")
 public class DogsServlet extends HttpServlet {
 	
-	private static final List<Dog> dogs = new ArrayList<Dog>(Arrays.asList(
+	private static final Set<Dog> dogs = new TreeSet<Dog>(new Comparator<Dog>() {
+		public int compare(Dog o1, Dog o2) {
+			return o1.getBreed().compareTo(o2.getBreed());
+		};
+	});
+	
+	static {
+		dogs.addAll(Arrays.asList(
 				new Dog("Border Collie", 10),
 				new Dog("Labrador", 2),
 				new Dog("Golden Retriever", 7)
 			));
+	}			
     
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		String breed = request.getParameter("breed");
 		String age = request.getParameter("age");
 		if(breed != null && age != null) {
@@ -32,6 +41,7 @@ public class DogsServlet extends HttpServlet {
 		}
 		
 		RequestDispatcher rd = null;
+		
  
 		request.setAttribute("dogs", dogs);
 		rd = request.getRequestDispatcher("/index.jsp");
