@@ -1,8 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'war'
 
-apply plugin: 'jetty'
-
 sourceCompatibility = 1.5
 version = '1.0'
 
@@ -19,10 +17,21 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.+'
     
     // to run our App on Heroku
-    runtimeOnly "org.mortbay.jetty:jetty-runner:8.1.1.v20120215"
+    runtimeOnly 'org.mortbay.jetty:jetty-runner:8.1.16.v20140903'
     // monitoring on Heroku
     runtimeOnly "com.newrelic.agent.java:newrelic-agent:2.18.0"
 }
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath (group: 'com.sahlbach.gradle', name: 'gradle-jetty-eclipse-plugin', version: '1.9.+')
+    }
+}
+
+apply plugin: 'jettyEclipse'
 
 task copyToLib << {
   copy {
