@@ -12,6 +12,8 @@
 <title>Animals</title>
 </head>
 <body>
+	<c:import url="/animals" />
+		
 	<%
 		Collection<Animal> animals = (Collection<Animal>) request.getAttribute("animals");
 		if (animals==null) {
@@ -22,7 +24,7 @@
 	<table align="center">
 		<tr style="padding: 5px;"><td><h3><b>New Dog</b></h3></td><td><h3><b>List of animals</b></h3></td></tr>
 		<tr><td align="right" valign="top" style="padding-right: 20px;">			
-			<form action="animals" method="post">
+			<form action="dogs" method="post">
 				<table>
 					<tr><td align="right">Breed : </td><td><input type="text" name="breed" required></td></tr>
 					<tr><td align="right">Age: </td><td><input type="number" name="age" required></td></tr>					
