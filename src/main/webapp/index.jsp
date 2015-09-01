@@ -29,7 +29,8 @@
 					<tr><td align="right">Breed : </td><td><input type="text" name="breed" required></td></tr>
 					<tr><td align="right">Age: </td><td><input type="number" name="age" required></td></tr>					
 				</table>
-				<input type="submit" title="Add" />
+				<input type="submit" title="Add" /><br/>
+				<b style="color: red;"><%=request.getAttribute("message") %></b>
 			</form>
 		</td>
 		<td valign="top">

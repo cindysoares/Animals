@@ -26,10 +26,15 @@ public class DogsServlet extends HttpServlet {
 		String breed = request.getParameter("breed");
 		String age = request.getParameter("age");
 		if(breed != null && age != null) {
-			Animals.add(new Dog(breed,  Integer.parseInt(age)));
+			boolean created = Animals.add(new Dog(breed,  Integer.parseInt(age)));
+			if(!created) {
+				request.setAttribute("message", breed + " already exists on the list.");
+			} else {
+				request.setAttribute("message", "");
+			}
 		}
 		 
-		request.setAttribute("animals", Animals.findAll());
+		request.setAttribute("animals", Animals.findAll());		
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
 		rd.forward(request, response);

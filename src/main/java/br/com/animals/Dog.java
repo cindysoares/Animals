@@ -9,12 +9,12 @@ public final class Dog extends Animal {
 		this.breed = breed;
 	}
 	
-	public String getBreed() {
+	public final String getBreed() {
 		return breed;
 	}
 	
 	@Override
-	public int getAge() {
+	public final int getAge() {
 		return super.getAge();
 	}
 
